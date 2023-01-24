@@ -133,7 +133,7 @@ bool saveGrid2Dr(double *M, int rows, int columns, char *path)
 double *addLayer2D(int rows, int columns)
 {
   double *tmp;
-  gpuErrchk(cudaMalloc(&tmp, sizeof(double) * rows * columns));
+  gpuErrchk(cudaMallocManaged(&tmp, sizeof(double) * rows * columns));
 
   if (!tmp)
     return NULL;
@@ -310,8 +310,8 @@ int main(int argc, char **argv)
   int *Xi;
   int *Xj;
 
-  gpuErrchk(cudaMalloc(&Xi, sizeof(int) * 5));
-  gpuErrchk(cudaMalloc(&Xj, sizeof(int) * 5));
+  gpuErrchk(cudaMallocManaged(&Xi, sizeof(int) * 5));
+  gpuErrchk(cudaMallocManaged(&Xj, sizeof(int) * 5));
 
   // Xj: von Neuman neighborhood row coordinates (see below)
   Xi[0] = 0;
